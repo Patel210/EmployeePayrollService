@@ -39,4 +39,15 @@ public class EmployeePayrollFileIOService {
 		}
 		return entries;
 	}
+
+	/**
+	 * Prints the date from the file
+	 */
+	public void printEmployeePayrollData() {
+		try {
+			Files.lines(Paths.get(PAYROLL_FILE_NAME)).forEach(System.out::println);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

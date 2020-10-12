@@ -20,32 +20,31 @@ public class EmployeePayrollService {
 	}
 
 	/**
-	 *  Reads from console
+	 * Reads from console
 	 */
 	public void readEmployeeData() {
-			Scanner sc = new Scanner(System.in);
-			System.out.println("Enter the employee data\n\nEnter Employee name: ");
-			String empName = sc.next();
-			System.out.println("Enter the employee id:");
-			long empId = sc.nextLong();
-			System.out.println("Enter the employee salary:");
-			long salary = sc.nextLong();
-			employeePayrollDataList.add(new EmployeePayrollData(empId, empName, salary));
-			sc.close();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the employee data\n\nEnter Employee name: ");
+		String empName = sc.next();
+		System.out.println("Enter the employee id:");
+		long empId = sc.nextLong();
+		System.out.println("Enter the employee salary:");
+		long salary = sc.nextLong();
+		employeePayrollDataList.add(new EmployeePayrollData(empId, empName, salary));
+		sc.close();
 
 	}
-	
+
 	/**
 	 * Writes to file or consoles
 	 */
 	public void writeEmployeeData(IOService ioService) {
-		if(ioService.equals(IOService.CONSOLE_IO)) {
+		if (ioService.equals(IOService.CONSOLE_IO)) {
 			employeePayrollDataList.forEach(System.out::println);
-		}
-		else if(ioService.equals(IOService.FILE_IO)) {
+		} else if (ioService.equals(IOService.FILE_IO)) {
 			new EmployeePayrollFileIOService().writeData(employeePayrollDataList);
 		}
-		
+
 	}
 
 	/**
@@ -53,6 +52,17 @@ public class EmployeePayrollService {
 	 */
 	public long countEntries(IOService ioService) {
 		return new EmployeePayrollFileIOService().countEntries();
+	}
+
+	/**
+	 * Prints employee Payroll Data
+	 */
+	public void printData(IOService ioService) {
+		if (ioService.equals(IOService.FILE_IO)) {
+			new EmployeePayrollFileIOService().printEmployeePayrollData();
+		} else if (ioService.equals(IOService.CONSOLE_IO)) {
+			employeePayrollDataList.forEach(System.out::println);
+		}
 	}
 
 }

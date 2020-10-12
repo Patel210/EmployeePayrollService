@@ -3,7 +3,6 @@ package com.practice.employeepayrollservice;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -22,6 +21,7 @@ public class EmployeePayrollServiceTest {
 		}
 		EmployeePayrollService employeePayrollService = new EmployeePayrollService(empPayrollDataList);
 		employeePayrollService.writeEmployeeData(IOService.FILE_IO);
+		employeePayrollService.printData(IOService.FILE_IO);
 		assertEquals(3, employeePayrollService.countEntries(IOService.FILE_IO));
 	}
 
