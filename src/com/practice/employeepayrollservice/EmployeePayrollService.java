@@ -22,17 +22,20 @@ public class EmployeePayrollService {
 	/**
 	 * Reads from console
 	 */
-	public void readEmployeeData() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter the employee data\n\nEnter Employee name: ");
-		String empName = sc.next();
-		System.out.println("Enter the employee id:");
-		long empId = sc.nextLong();
-		System.out.println("Enter the employee salary:");
-		long salary = sc.nextLong();
-		employeePayrollDataList.add(new EmployeePayrollData(empId, empName, salary));
-		sc.close();
-
+	public void readEmployeeData(IOService ioService) {
+		if (ioService.equals(IOService.CONSOLE_IO)) {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Enter the employee data\n\nEnter Employee name: ");
+			String empName = sc.next();
+			System.out.println("Enter the employee id:");
+			long empId = sc.nextLong();
+			System.out.println("Enter the employee salary:");
+			long salary = sc.nextLong();
+			employeePayrollDataList.add(new EmployeePayrollData(empId, empName, salary));
+			sc.close();
+		} else if (ioService.equals(IOService.FILE_IO)) {
+			this.employeePayrollDataList = new EmployeePayrollFileIOService().readEmployeePayrollData();
+		}
 	}
 
 	/**
@@ -65,4 +68,10 @@ public class EmployeePayrollService {
 		}
 	}
 
+	/**
+	 *Returns the size of the employee payroll data list
+	 */
+	public long employeeDataSize() {
+		return employeePayrollDataList.size();
+	}
 }

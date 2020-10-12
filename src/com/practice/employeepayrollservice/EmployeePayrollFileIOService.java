@@ -50,4 +50,21 @@ public class EmployeePayrollFileIOService {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Reads Data from the file
+	 */
+	public ArrayList<EmployeePayrollData> readEmployeePayrollData(){
+		ArrayList<EmployeePayrollData> employeePayrollDataList = new ArrayList<EmployeePayrollData>();
+		try {
+			Files.lines(Paths.get(PAYROLL_FILE_NAME)).forEach(line -> {
+				line = line.trim();
+				String[] empData = line.split("[\\s]{0,}[a-zA-Z]+[:][\\s]");
+				employeePayrollDataList.add(new EmployeePayrollData(Long.parseLong(empData[1]), empData[2], Long.parseLong(empData[3])));
+			});
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		return employeePayrollDataList;
+	}
 }

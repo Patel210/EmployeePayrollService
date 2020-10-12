@@ -13,7 +13,7 @@ public class EmployeePayrollData {
 
 	@Override
 	public String toString() {
-		return "Id :" + empId + " Name : " + empName + " Salary : " + salary;
+		return "Id: " + empId + " Name: " + empName + " Salary: " + salary;
 	}
 
 	public String getEmpName() {
